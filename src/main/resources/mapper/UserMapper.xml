@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weteam.cms.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.weteam.cms.modal.entity.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="union_id" property="unionId" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="TINYINT" />
+    <result column="show_me" property="showMe" jdbcType="TINYINT" />
+    <result column="grade" property="grade" jdbcType="VARCHAR" />
+    <result column="academy_id" property="academyId" jdbcType="INTEGER" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="person_info" property="personInfo" jdbcType="VARCHAR" />
+    <result column="avatar_url" property="avatarUrl" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="login_last_time" property="loginLastTime" jdbcType="TIMESTAMP" />
+    <result column="login_enable" property="loginEnable" jdbcType="TINYINT" />
+    <result column="user_views" property="userViews" jdbcType="BIGINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.weteam.cms.modal.entity.User" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user (nickname, username, `password`, 
+      open_id, union_id, gender, 
+      show_me, grade, academy_id, 
+      contact, phone, email, 
+      person_info, avatar_url, create_time, 
+      login_last_time, login_enable, user_views
+      )
+    values (#{nickname,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{openId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT}, 
+      #{showMe,jdbcType=TINYINT}, #{grade,jdbcType=VARCHAR}, #{academyId,jdbcType=INTEGER}, 
+      #{contact,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{personInfo,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{loginLastTime,jdbcType=TIMESTAMP}, #{loginEnable,jdbcType=TINYINT}, #{userViews,jdbcType=BIGINT}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.weteam.cms.modal.entity.User" >
+    update user
+    set nickname = #{nickname,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      union_id = #{unionId,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=TINYINT},
+      show_me = #{showMe,jdbcType=TINYINT},
+      grade = #{grade,jdbcType=VARCHAR},
+      academy_id = #{academyId,jdbcType=INTEGER},
+      contact = #{contact,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      person_info = #{personInfo,jdbcType=VARCHAR},
+      avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      login_last_time = #{loginLastTime,jdbcType=TIMESTAMP},
+      login_enable = #{loginEnable,jdbcType=TINYINT},
+      user_views = #{userViews,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, nickname, username, `password`, open_id, union_id, gender, show_me, grade, 
+    academy_id, contact, phone, email, person_info, avatar_url, create_time, login_last_time, 
+    login_enable, user_views
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, nickname, username, `password`, open_id, union_id, gender, show_me, grade, 
+    academy_id, contact, phone, email, person_info, avatar_url, create_time, login_last_time, 
+    login_enable, user_views
+    from user
+  </select>
+</mapper>
